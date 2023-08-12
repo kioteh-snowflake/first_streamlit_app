@@ -4,8 +4,6 @@ import requests
 
 streamlit.title('My mom\'s new healthy diner')
 
-fruityvice_response = requests.get('https://fruityvice.com/api/fruit/watermelon')
-
 streamlit.header('Breakfast Menu')
 streamlit.text('🥣 Omega 3 and blueberry oatmeal')
 streamlit.text('🥗 Kale, Spinach and Rocket Smoothie')
@@ -23,6 +21,11 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 # Display the table on the page.
 streamlit.dataframe(fruits_to_show)
 
+#Fruityvice API section
+fruityvice_response = requests.get('https://fruityvice.com/api/fruit/watermelon')
+fruityvice_normalized = pandas.json_normalized(fruityvice_response.json())
+
 streamlit.header('Fruityvice Fruit Advice!')
 streamlit.text(fruityvice_response.json())
+streamlit.dataframe(fruityvice_normalized)
 
